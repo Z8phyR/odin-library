@@ -1,32 +1,120 @@
+// POPUP FORM TEST
 
-const Book = {
-    name: "The Hobbit",
-    author: "J.R.R Tolkein",
-    pages: 400,
-    read: true,
-    genre: "fantasy",
-    addBook: function() {
-        console.log("Adding Book to Library")
-    }
-    
+let myLibrary = [];
+let bookCount = 0;
+
+const MAIN = document.querySelector(".main");
+const PopupButton = document.createElement('button');
+PopupButton.textContent = "Add Book";
+MAIN.appendChild(PopupButton);
+PopupButton.onclick = PopUp;
+const openForm = document.getElementById("popupForm")
+
+
+function PopUp() {
+    openForm.style.display = "block"
 }
 
+function closePopup() {
+    openForm.style.display = "none"
+}
 
-let SHOWBOOK = document.getElementById('book')
-SHOWBOOK.textContent = Book;
+function Book(title,author,pages)  {
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.isRead = false;
+    this.bookId = bookCount
 
+}
+Book.prototype.info = function () {
+    console.log(`Title: ${this.title}, Author: ${this.author}`)
+}
+    
+addBook = () => {
+    const titleInputValue = document.getElementById("book-title").value
+    const authorInputValue = document.getElementById("book-author").value;
+    const pagesInputValue = document.getElementById("book-pages").value;
+    const isReadValue = document.getElementById('book-read');
+    
+    bookCount++;
+    let book = new Book(
+        titleInputValue,
+        authorInputValue,
+        pagesInputValue)
+        isReadValue.checked ? book.isRead = true : book.isRead = false;
 
+    myLibrary.push(book);
+    book.info();
+    console.table(myLibrary);
+    return updateBookGrid(book);
 
-// All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array.
+}
 
-// Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”. It might help for now to manually add a few books to your array so you can see the display.
+function updateBookGrid(book) {
+const bookContent = document.querySelector('.book-content');
+const bookCard = document.createElement("div")
 
-// Add a “NEW BOOK” button that brings up a form allowing users to input the details for the new book: author, title, number of pages, whether it’s been read and anything else you might want.
+bookCard.classList.add("book-card");
+bookCard.classList.add(`data-bookId-${bookCount}`)
+const bookTitle = document.createElement('h2');
+const bookAuthor = document.createElement('p');
+const bookPages = document.createElement('p');
+const removeBtn = document.createElement('button');
+const readBtn = document.createElement('button');
+const buttonGrp = document.createElement('div');
 
-// Add a button on each book’s display to remove the book from the library.
+buttonGrp.classList.add('button-group');
 
-// You will need to associate your DOM elements with the actual book objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.
+bookRead =(book) => {
+    if (book.isRead) {
+    readBtn.textContent = "Read"
+    return readBtn.style.backgroundColor = "lightgreen";}
+    else {
+        readBtn.textContent = "Not Read"
+        return readBtn.style.backgroundColor = "lightcoral"
+    };
+}
+bookRead(book);
+readBtn.classList.add('read-button');
+removeBtn.textContent = "Remove Book";
+removeBtn.classList.add('remove-button');
+removeBtn.onclick = () => removeBook(book);
+readBtn.onclick = () => toggleRead(book);
+bookTitle.textContent = `Book Title: ${book.title}`
+bookAuthor.textContent = `Author: ${book.author}`;
+bookPages.textContent = `Pages: ${book.pages}`
 
-// Add a button on each book’s display to change its read status.
+bookCard.appendChild(bookTitle)
+bookCard.appendChild(bookAuthor)
+bookCard.appendChild(bookPages);
+buttonGrp.appendChild(removeBtn);
+buttonGrp.appendChild(readBtn)
+bookCard.appendChild(buttonGrp)
+bookContent.appendChild(bookCard)
+}
+//remove the book card from html when user deletes the book
 
-// To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
+function removeBook(book) {
+    const deleteBook = document.querySelector(`.data-bookId-${book.bookId}`)
+    deleteBook.innerHTML = "";
+    console.log(`${book.title} removed`)
+    myLibrary.splice(myLibrary.indexOf(book),1)
+}
+
+function toggleRead(book) {
+    const readBtn = document.querySelector(`.data-bookId-${book.bookId} .read-button`);
+    if (book.isRead) 
+    {
+        book.isRead = false;
+        readBtn.style.backgroundColor = "lightcoral"
+        readBtn.textContent = "Not Read"
+    }
+        else 
+    {
+        book.isRead = true;
+        readBtn.textContent = "Read"
+        readBtn.style.backgroundColor = "lightgreen";
+}
+}
+

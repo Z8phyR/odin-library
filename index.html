@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odin | Library Catalog</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h3>Your Library</h3>
-        <button class="add">Add Book</button>
-        <button class="remove">Remove Book</button>
-
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POP UP FORM TEST</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <h1>Library</h1>
-    <div class="main">
-        <div id="book">
-
-        </div>
-
-
+    <div class="formPopup" id="popupForm">
+      <div class="formContent">
+      <h3>Please add your book</h3>
+      <label for="book-title"> Book Title </label>
+      <input type="text" id="book-title" placeholder="Book title" />
+      <br>
+      <label for="book-author"> Book Author </label>
+      <input type="text" id="book-author" placeholder="Book Author" />
+      <label for="book-pages"></label>
+      <input type="number" id="book-pages" style="width: 60px;" placeholder="Pages" />
+      
+      <label for="book-read">Read?</label>
+      <input type="checkbox" id="book-read" />
+       <button id="addBook" onclick="addBook(closePopup())">Submit</button>
+    </div>
     </div>
 
+    <div class="main">
+      <div class="book-content"></div>
+    </div>
 
-
-
-
-    <script src="script.js">
-
-    </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
