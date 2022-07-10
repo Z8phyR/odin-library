@@ -4,11 +4,45 @@
     margin: 0;
 }
 
+body {
+    background-color: lightsteelblue;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 5px solid lightblue;
+    margin: 5px;
+    font-size: 1.3rem;
+
+
+}
+
+header > button {
+    width: 100px;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid lightblue;
+    margin-top: 5px;
+    background-color: aliceblue;
+    transition: 0.2s;
+    font-size: 1.1rem;
+}
+
+header > button:hover {
+    transform: scale(1.1,1.1);
+    cursor: pointer;
+}
+
 .formPopup {
     display: none;
     position: fixed;
-    left: 45%;
-    top: 20%;
+    left: 42%;
+    top: 25%;
     z-index: 4;
     max-width: 300px;
     max-height: 300px;
@@ -27,23 +61,33 @@
 }
 
 .button-group {
-    background-color:lightsalmon;
-    margin: 20px;
-    text-align: center;;
+    /* background-color:lightsalmon; */
+    margin: 5px;
+    text-align: center;
 }
-.remove-button {
-    width: 100px;
-}
+.remove-button,
 .read-button {
     width: 100px;
+    padding: 2px;
+    border: 2px solid lightblue;
+    margin: 2px;
+    border-radius: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.remove-button:hover,
+.read-button:hover {
+    transform: scale(1.1,1.1);
+
 }
 
 .book-content {
     display: grid;
-    background-color: lightgray;
-    margin: 10px;
-    padding: 20px;
     gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
 
 }
 .book-card {
@@ -54,5 +98,20 @@
     text-align: center;
     border-radius: 20px;
     padding: 5px;
-    /* padding: 10px; */
+    margin: 10px;
+    transition: 0.2s;
+    border: 3px solid lightseagreen;
+    align-self: center;
+    justify-content: center;
+}
+
+.book-card:hover {
+    transform: scale(1.04,1.05);
+}
+
+footer {
+    position: fixed;
+    bottom: 5px;
+    left: 40%;
+
 }
